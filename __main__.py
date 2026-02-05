@@ -1,7 +1,9 @@
 import numpy as np
 from Errors import InvalidForwardPass, InputError
 from activation_functions import relu, leaky_relu, softmax, sigmoid
+from loss_functions import binary_crossentropy, mean_squared_error
 
+rng = np.random.default_rng()
 rng = np.random.default_rng()
 
 class NeuralNetwork():
@@ -60,6 +62,14 @@ class NeuralNetwork():
         
         self.values[layer] = self.activation_functions[activation_function](self.values[layer])
 
+
+    def cost(self, loss_metric, labels):
+
+        print (self.values[3])
+        print(mean_squared_error(self.values[3], rng.integers(0, 2, size=(2, 500))))
+        
+
+
 NN = NeuralNetwork(4, [10, 100, 100, 2], 1, 1, 500)
 
 NN.input_values(rng.random(size=(10, 500)))
@@ -67,4 +77,4 @@ NN.forward_pass(1, "sigmoid")
 NN.forward_pass(2, "sigmoid")
 NN.forward_pass(3, "softmax")
 
-print (NN.values[3])
+NN.cost(1, 1)
