@@ -3,6 +3,9 @@ import numpy as np
 def sigmoid(np_array):
     return  1/(1+np.e**(-np_array))
 
+def sigmoid_derivative(np_array):
+    return np.multiply(np_array, 1 - np_array)
+
 def relu(np_array):
     return np.maximum(0, np_array)
 

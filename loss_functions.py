@@ -13,6 +13,14 @@ def binary_crossentropy(np_array, np_labels):
 
     return np_array
 
+def binary_crossentropy_prime(np_array, np_labels):
+    np_array = np.clip(np_array, epsilon, 1 - epsilon)
+    np_labels = np.clip(np_labels, epsilon, 1 - epsilon)
+
+    for j in range(len(np_array[0])):
+        np_array[:, j] = np.divide(np_array[:, j] - np_labels[:, j], np.multiply(np_array[:, j], 1 - np_array[:, j]))
+    return np_array
+
 def mean_squared_error(np_array, np_labels):
 
     costs = np.array([])
@@ -24,8 +32,6 @@ def mean_squared_error(np_array, np_labels):
 
     costs = costs.reshape(1, 500)
 
-
-    
     return costs
         
 
