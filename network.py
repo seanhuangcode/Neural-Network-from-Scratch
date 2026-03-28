@@ -2,6 +2,9 @@ import numpy as np
 from Errors import InvalidForwardPass, InputError
 from activation_functions import relu, leaky_relu, softmax, sigmoid, sigmoid_derivative
 from loss_functions import binary_crossentropy, mean_squared_error, binary_crossentropy_prime
+from data_processing import prep_data
+
+import matplotlib.pyplot as plt
 
 rng = np.random.default_rng()
 
@@ -92,6 +95,10 @@ class NeuralNetwork():
             self.weights[layer] -= np.multiply(learning_rate, self.gradient_w[layer])
             self.biases[layer] -= np.multiply(learning_rate, self.gradient_b[layer])
 
+    def calculate_accuracy(self, labels):
+        a = 0
+        
+
 
 
 
@@ -110,31 +117,56 @@ print(NN.gradient_b)
 
 '''
 
-input_count = 2
+input_count = 30
 output_count = 1
 
-NN = NeuralNetwork(5, [input_count, 100, 100, 100, output_count], 1)
+network_shape = [input_count, 256, 256, 256, 256, 256, 256, 256, output_count]
+network_layers = len(network_shape)
 
-y_labels = rng.integers(0, 2, size=(output_count, 50))
-x_inputs = rng.random(size=(2, 50))
+NN = NeuralNetwork(network_layers, network_shape, 1)
+
+x_inputs, y_labels = prep_data()
+cost_history = []
+
 
 def train(epochs):
-    batch_size = 50
+    batch_size = 32
+    samples = x_inputs.shape[1]
+    print(samples)
+
     for epoch in range(epochs):
-        for iteration in range(0, 1001, batch_size):
-            NN.input_values(x_inputs)
 
-            NN.forward_pass(1, "sigmoid")
-            NN.forward_pass(2, "sigmoid")
-            NN.forward_pass(3, "sigmoid")
-            NN.forward_pass(4, "sigmoid")
+        permutation = np.random.permutation(samples)
+        x_shuffled = x_inputs[:, permutation]
+        y_shuffled = y_labels[:, permutation]
 
-            avg_cost = NN.cost("binary_crossentropy", y_labels, batch_size)
+        for iteration in range(0, samples + 1, batch_size):
+
+            x_batch = x_shuffled[:, iteration:iteration+batch_size]
+            y_batch = y_shuffled[:, iteration:iteration+batch_size]
+
+            current_batch_size = x_batch.shape[1] 
+
+            NN.input_values(x_batch)
+
+            for layer_pass in range(network_layers - 1):
+                NN.forward_pass(layer_pass + 1, "sigmoid")
+
+            avg_cost = NN.cost("binary_crossentropy", y_batch, current_batch_size)
+
+            cost_history.append(avg_cost)
+
 
             print (f'Cost: {avg_cost}, epoch: {epoch} iteration: {iteration}')
             
-            NN.backprop("binary_crossentropy", "sigmoid", y_labels, batch_size)
-            NN.update_params(0.1)
+            NN.backprop("binary_crossentropy", "sigmoid", y_batch, current_batch_size)
+            NN.update_params(0.01)
 
-train(2000)
 
+train(10)
+
+plt.figure(figsize=(10, 6))
+plt.plot(cost_history, label="Cost")
+plt.legend()
+plt.grid(True)
+plt.show()
