@@ -2,11 +2,11 @@
 
 A deep-neural-network made from scratch in Python with only NumPy. The aim of this project was to learn foundational mathematics to deep learning such as gradient-based optimzation in backpropagation, matrix multiplication, and applications of the chain rule. Additionally, optimization techniques such as vectorization were learnt.
 
-#Overview
+# Overview
 
 Tested using the Wisconsin breast cancer dataset from Kaggle.
 
-#Implementations
+# Implementations
 
 - Forward propagation
 - Backpropagation (with manual gradient computation)
@@ -14,13 +14,13 @@ Tested using the Wisconsin breast cancer dataset from Kaggle.
 - Sigmoid activation function
 - Binary cross-entropy loss
 
-#Plans for future
+# Plans for future
 In the future I want to add:
 - autograd
 - more loss/activation functions
 - optimization algorithms (eg., ADAM
 
-#Results
+# Results
 
 <img width="880" height="556" alt="Screenshot 2026-06-29 at 9 38 55 AM" src="https://github.com/user-attachments/assets/9cea8083-2420-4f44-a24b-e4c692cde5fd" />
 
