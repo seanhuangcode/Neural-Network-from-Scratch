@@ -1,16 +1,16 @@
 # Neural-Network-from-Scratch
 
-A deep-neural-network made from scratch in Python with only NumPy. The aim of this project was to learn foundational mathematics to deep learning such as gradient-based optimzation in backpropagation, matrix multiplication, and applications of the chain rule. Additionally, optimization techniques such as vectorization were learnt.
+A deep-neural-network made from scratch in Python with only NumPy. The aim of this project was to learn foundational mathematics to deep learning such as gradient-based optimzation in backpropagation, matrix multiplication, and applications of the chain rule for gradient optimization. Additionally, optimization techniques such as vectorization were used.
 
 # Overview
 
-Tested using the Wisconsin breast cancer dataset from Kaggle.
+Tested using the Wisconsin breast cancer dataset from Kaggle for a binary classification task.
 
 # Implementations
 
 - Forward propagation
 - Backpropagation (with manual gradient computation)
-- Gradient descent optimization
+- Gradient descent
 - Sigmoid activation function
 - Binary cross-entropy loss
 
@@ -18,7 +18,7 @@ Tested using the Wisconsin breast cancer dataset from Kaggle.
 In the future I want to add:
 - autograd
 - more loss/activation functions
-- optimization algorithms (eg., ADAM
+- optimization algorithms (eg., ADAM optimizer)
 
 # Results
 
