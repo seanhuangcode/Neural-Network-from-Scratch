@@ -72,8 +72,6 @@ class NeuralNetwork():
 
         return -self.avg_cost
     
-    def backward_pass(self):
-        a = 0
 
     def backprop(self, loss_function, activation_function, labels, batch_size):
         self.propagate = self.loss_functions[loss_function][1](self.values[self.layer_count - 1], labels) / batch_size
@@ -94,10 +92,6 @@ class NeuralNetwork():
         for layer in range(1, self.layer_count):
             self.weights[layer] -= np.multiply(learning_rate, self.gradient_w[layer])
             self.biases[layer] -= np.multiply(learning_rate, self.gradient_b[layer])
-
-    def calculate_accuracy(self, labels):
-        a = 0
-        
 
 
 
